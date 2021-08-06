@@ -1,4 +1,4 @@
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: news-service
@@ -6,6 +6,9 @@ metadata:
     app: news-service
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: news-service
   template:
     metadata:
       labels:
@@ -13,7 +16,7 @@ spec:
     spec:
       containers:
       - name: news-service
-        image: eu.gcr.io/myproject/news-service:${TAG}
+        image: localhost:5001/myproject/news-service:${TAG}
         command:
         ports:
           - containerPort: 8080

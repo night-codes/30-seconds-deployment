@@ -21,10 +21,10 @@ clean:
 
 pack:
 	GOOS=linux make build
-	docker build -t eu.gcr.io/myproject/news-service:$(TAG) .
+	docker build -t localhost:5001/myproject/news-service:$(TAG) .
 
 upload:
-	gcloud docker -- push eu.gcr.io/myproject/news-service:$(TAG)
+	docker push localhost:5001/myproject/news-service:$(TAG)
 
 deploy:
 	envsubst < k8s/deployment.yml | kubectl apply -f -
